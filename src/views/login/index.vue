@@ -45,17 +45,17 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 //引入用户相关仓库
 import useUserStore from '@/store/modules/user'
 import { getTime } from '@/utils/time'
-import { ca } from 'element-plus/es/locale/index.mjs'
 let userStore = useUserStore()
 //获取表单元素
-let loginForms = ref
+let loginForms = ref(null)
 //获取路由器
 let $router = useRouter()
+let $route = useRoute()
 //定义变量控制按钮加载效果
 let loading = ref<any>(false)
 //收集表单数据
@@ -63,14 +63,15 @@ let loginFrom = reactive({ username: 'admin', password: '111111' })
 
 const login = async () => {
   // 表单项全部通过再发请求
-  await loginForms.value.validate()
+  await (loginForms.value as unknown as HTMLFormElement).validate()
   // 开始加载
   loading.value = true
   try {
     // 也可以用.then 方法
     await userStore.userLogin(loginFrom)
     // 登录成功跳转到首页
-    $router.push('/')
+    let redirect = $route.query.redirect as string
+    $router.push({ path: redirect || '/' })
     ElNotification({
       type: 'success',
       message: '登录成功',
@@ -88,7 +89,7 @@ const login = async () => {
 }
 
 // 自定义校验规则所需函数
-const validatorUserName = (rule: any, value: any, callback: any) => {
+const validatorUserName = (_rule: any, value: any, callback: any) => {
   // rule 校验规则对象 value 表单元素内容 callbakc 符合条件放行 不符合条件，调用callback注入错误信息
   if (value.length >= 5) {
     callback()
@@ -96,7 +97,7 @@ const validatorUserName = (rule: any, value: any, callback: any) => {
     callback(new Error('账号长度至少5位'))
   }
 }
-const validatorPassword = (rule: any, value: any, callback: any) => {
+const validatorPassword = (_rule: any, value: any, callback: any) => {
   if (value.length >= 6) {
     callback()
   } else {
