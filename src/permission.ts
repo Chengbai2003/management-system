@@ -17,12 +17,9 @@ router.beforeEach(async (to, from, next) => {
   nprogress.start() // 开启进度条
   const token = userStore.token
   const username = userStore.username
-  console.log(212)
-  console.log(token)
   // 用户登录判断
   if (token) {
     if (to.path === '/login') {
-      console.log(111)
       next({ path: '/' })
     } else {
       if (username) {

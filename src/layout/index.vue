@@ -81,7 +81,6 @@ defineOptions({
     position: fixed;
     top: $base-tabbar-height;
     left: $base-menu-width;
-    background: yellowgreen;
     height: calc(100% - $base-tabbar-height);
     width: calc(100% - $base-menu-width);
     padding: 20px;
