@@ -6,7 +6,7 @@ import useUserStore from '@/store/modules/user'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带api
-  timeout: 5000, // 超时时间
+  timeout: 10000, // 超时时间
 })
 // 请求拦截器
 request.interceptors.request.use((config) => {
@@ -42,10 +42,7 @@ request.interceptors.response.use(
         message = '网络出现问题'
         break
     }
-    ElMessage.error({
-      type: 'error',
-      message,
-    })
+    ElMessage.error(message ? message : '超时')
 
     return Promise.reject(error)
   },
