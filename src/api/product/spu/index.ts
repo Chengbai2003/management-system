@@ -7,7 +7,10 @@ import {
   SpuHasSale,
   HasSaleAttrValue,
   SpuData,
+  SkuData,
+  SkuInfoData,
 } from './type'
+
 enum API {
   // 已有spu
   HasSpu_Url = '/admin/product/',
@@ -23,6 +26,12 @@ enum API {
   AddSpu_Url = '/admin/product/saveSpuInfo',
   // 修改spu
   UpdateSpu_Url = '/admin/product/updateSpuInfo',
+  // 追加一个新的sku
+  AddSku_Url = '/admin/product/saveSkuInfo',
+  // 查看某个spu下的sku
+  SkuInfo_Url = '/admin/product/findBySpuId/',
+  // 删除已有spu
+  DeleteSpu_Url = '/admin/product/deleteSpu/',
 }
 
 export const reqSpu = (page: number, limit: number, id: Id) =>
@@ -35,8 +44,8 @@ export const reqAllTrademark = () =>
 
 export const reqImg = (id: number) =>
   request.get<any, SpuHasImg>(API.Image_Url + id)
-
-export const reqHasSale = (id: Id) =>
+// 某个spu已有的销售属性
+export const reqHasSale = (id: number) =>
   request.get<any, SpuHasSale>(API.SpuHasSale_Url + id)
 // 获取全部销售属性
 export const reqAllSale = () =>
@@ -49,3 +58,12 @@ export const reqAddOrUpdateSpu = (data: SpuData) => {
     return request.post<any, any>(API.AddSpu_Url, data)
   }
 }
+
+export const reqAddSku = (data: SkuData) =>
+  request.post<any, any>(API.AddSku_Url, data)
+
+export const reqSkuInfo = (id: number) =>
+  request.get<any, SkuInfoData>(API.SkuInfo_Url + id)
+
+export const reqDeleteSpu = (id: number) =>
+  request.delete<any, any>(API.DeleteSpu_Url + id)

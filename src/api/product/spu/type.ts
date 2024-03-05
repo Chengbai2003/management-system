@@ -87,3 +87,33 @@ export interface HasSaleAttr {
 export interface HasSaleAttrValue extends ResponseData {
   data: HasSaleAttr[]
 }
+
+/*
+  新增Sku所需数据
+  三级分类ID,对应的Spu的id,品牌的Id ———— sku名字、价格、重量、描述、平台属性（属性id和值id）、销售属性（id、值）、sku图片
+*/
+export interface Attr {
+  attrId: Id
+  ValueId: Id
+}
+export interface SaleArr {
+  saleAttrId: Id
+  saleAttrValueId: Id
+}
+export interface SkuData {
+  category3Id: Id
+  spuId: Id
+  tmId: Id
+  skuName: string
+  price: number | string
+  weight: number | string
+  skuDesc: string
+  skuAttrValueList: Attr[]
+  skuSaleAttrValueList: SaleArr[]
+  skuDefaultImg: string
+}
+
+// 获取sku数据接口
+export interface SkuInfoData extends ResponseData {
+  data: SkuData[]
+}
