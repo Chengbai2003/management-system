@@ -3,7 +3,7 @@
     <el-form :inline="true">
       <el-form-item label="一级分类">
         <el-select
-          :disabled="scene"
+          :disabled="scene === 0 ? false : true"
           placeholder="请选择"
           style="width: 200px"
           v-model="categoryStore.c1Id"
@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="二级分类">
         <el-select
-          :disabled="scene"
+          :disabled="scene === 0 ? false : true"
           placeholder="请选择"
           style="width: 200px"
           @change="change2"
@@ -35,7 +35,7 @@
       </el-form-item>
       <el-form-item label="三级分类">
         <el-select
-          :disabled="scene"
+          :disabled="scene === 0 ? false : true"
           placeholder="请选择"
           style="width: 200px"
           v-model="categoryStore.c3Id"

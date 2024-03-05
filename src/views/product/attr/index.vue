@@ -2,7 +2,7 @@
   <div>
     <Category :scene="scene"></Category>
     <el-card style="margin: 10px 0">
-      <div v-show="!scene">
+      <div v-show="scene === 0">
         <el-button
           type="primary"
           size="default"
@@ -51,7 +51,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <div v-show="scene">
+      <div v-show="scene === 1">
         <!-- 展示添加和修改得结构 -->
         <el-form :inline="true">
           <el-form-item label="属性名称">
@@ -131,7 +131,7 @@ import { ElMessage } from 'element-plus'
 let categoryStore = useCategoryStore()
 let attrArr = ref<Attr[]>([])
 
-let scene = ref<boolean>(false)
+let scene = ref<number>(0)
 //收集新增属性对象
 let attrParams = reactive<Attr>({
   attrName: '',
@@ -159,7 +159,7 @@ const getAttr = async () => {
 }
 
 const addAttr = () => {
-  scene.value = true
+  scene.value = 1
   Object.assign(attrParams, {
     attrName: '',
     attrValueList: [],
@@ -169,7 +169,7 @@ const addAttr = () => {
 }
 // 编辑属性
 const editAttr = (row: any) => {
-  scene.value = true
+  scene.value = 1
   Object.assign(attrParams, JSON.parse(JSON.stringify(row)))
 }
 // 删除属性
@@ -183,7 +183,7 @@ const deleteAttr = async (id: number) => {
   }
 }
 const cancel = () => {
-  scene.value = false
+  scene.value = 0
 }
 
 const addAttrValue = () => {
@@ -199,7 +199,7 @@ const addAttrValue = () => {
 const save = async () => {
   let res = await reqAddOrUpdateAttr(attrParams)
   if (res.code === 200) {
-    scene.value = false
+    scene.value = 0
     ElMessage.success(attrParams.id ? '修改成功' : '添加成功')
     getAttr()
   } else ElMessage.error(attrParams.id ? '修改失败' : '添加失败')
