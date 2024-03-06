@@ -103,6 +103,19 @@ let skuParams = reactive<SkuData>({
 let table = ref<any>()
 
 const initSku = async (c1Id: Id, c2Id: Id, row: SpuData) => {
+  //清空数据
+  Object.assign(skuParams, {
+    category3Id: '',
+    spuId: '',
+    tmId: '',
+    skuName: '',
+    price: '',
+    weight: '',
+    skuDesc: '',
+    skuDefaultImg: '',
+    skuAttrValueList: [],
+    skuSaleAttrValueList: [],
+  })
   // 收集数据
   skuParams.category3Id = row.category3Id
   skuParams.spuId = row.id as number
