@@ -16,6 +16,8 @@ import router from './router'
 import pinia from './store'
 // 引入路由鉴权
 import './permission'
+// 暗黑模式需要样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const app = createApp(App)
 

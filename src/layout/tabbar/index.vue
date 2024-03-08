@@ -25,7 +25,6 @@ defineOptions({
   height: 100%;
   display: flex;
   justify-content: space-between;
-  background-image: linear-gradient(to right, white, skyblue);
   .tabbar_left {
     display: flex;
     margin-left: 20px;
