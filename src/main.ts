@@ -18,9 +18,12 @@ import pinia from './store'
 import './permission'
 // 暗黑模式需要样式
 import 'element-plus/theme-chalk/dark/css-vars.css'
+// 引入自定义指令文件
+import { isHasButton } from '@/directive/has'
 
 const app = createApp(App)
 
+isHasButton(app)
 app.use(Elementplus, {
   locale: zhCn,
 })

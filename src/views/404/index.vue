@@ -1,9 +1,32 @@
 <template>
-  <div>
-    <h1>我是一级路由404</h1>
+  <div class="box">
+    <img src="../../assets/images/error_images/404.png" alt="" />
+    <button @click="goHome">首页</button>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
 
-<style lang="scss" scoped></style>
+let $router = useRouter()
+const goHome = () => {
+  $router.push('/home')
+}
+</script>
+
+<style lang="scss" scoped>
+.box {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 800px;
+    height: 400px;
+  }
+  button {
+    width: 50px;
+    height: 30px;
+  }
+}
+</style>

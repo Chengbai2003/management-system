@@ -1,18 +1,18 @@
-// 对外暴露配置路由(常量路由)
+//对外暴露配置路由(常量路由):全部用户都可以访问到的路由
 export const constantRoute = [
   {
-    // 登录展示路由
+    //登录
     path: '/login',
     component: () => import('@/views/login/index.vue'),
     name: 'login',
     meta: {
-      title: '登录',
-      hidden: true,
-      icon: 'Promotion',
+      title: '登录', //菜单标题
+      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+      icon: 'Promotion', //菜单文字左侧的图标,支持element-plus全部图标
     },
   },
   {
-    // 登录成功以后展示路由
+    //登录成功以后展示数据的路由
     path: '/',
     component: () => import('@/layout/index.vue'),
     name: 'layout',
@@ -35,7 +35,7 @@ export const constantRoute = [
     ],
   },
   {
-    // 404
+    //404
     path: '/404',
     component: () => import('@/views/404/index.vue'),
     name: '404',
@@ -55,10 +55,14 @@ export const constantRoute = [
       icon: 'Platform',
     },
   },
+]
+
+//异步路由
+export const asyncRoutes = [
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),
-    name: 'acl',
+    name: 'Acl',
     meta: {
       title: '权限管理',
       icon: 'Lock',
@@ -68,7 +72,7 @@ export const constantRoute = [
       {
         path: '/acl/user',
         component: () => import('@/views/acl/user/index.vue'),
-        name: 'Acl',
+        name: 'User',
         meta: {
           title: '用户管理',
           icon: 'User',
@@ -89,7 +93,7 @@ export const constantRoute = [
         name: 'Permission',
         meta: {
           title: '菜单管理',
-          icon: 'Menu',
+          icon: 'Monitor',
         },
       },
     ],
@@ -119,15 +123,15 @@ export const constantRoute = [
         name: 'Attr',
         meta: {
           title: '属性管理',
-          icon: 'Present',
+          icon: 'ChromeFilled',
         },
       },
       {
         path: '/product/spu',
         component: () => import('@/views/product/spu/index.vue'),
-        name: 'Spk',
+        name: 'Spu',
         meta: {
-          title: 'SPU',
+          title: 'SPU管理',
           icon: 'Calendar',
         },
       },
@@ -136,20 +140,23 @@ export const constantRoute = [
         component: () => import('@/views/product/sku/index.vue'),
         name: 'Sku',
         meta: {
-          title: 'SKU',
+          title: 'SKU管理',
           icon: 'Orange',
         },
       },
     ],
   },
-  {
-    // 任意路由
-    path: '/:pathMatch(.*)*',
-    redirect: '/404',
-    name: 'any',
-    meta: {
-      title: '任意路由',
-      hidden: true,
-    },
-  },
 ]
+
+//任意路由
+export const anyRoute = {
+  //任意路由
+  path: '/:pathMatch(.*)*',
+  redirect: '/404',
+  name: 'Any',
+  meta: {
+    title: '任意路由',
+    hidden: true,
+    icon: 'DataLine',
+  },
+}

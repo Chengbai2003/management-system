@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // 路由鉴权：某路由在什么条件下可以访问
 import router from '@/router'
 import setting from './setting'
@@ -27,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           await userStore.userInfo()
-          next()
+          next({ ...to, replace: true })
         } catch (error) {
           await userStore.userLogout()
           next({ path: '/login', query: { redirect: to.path } })

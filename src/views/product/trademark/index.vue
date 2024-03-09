@@ -7,6 +7,7 @@
         size="default"
         icon="Plus"
         @click="addTrademark"
+        v-has="'btn.Trademark.add'"
       >
         添加品牌
       </el-button>
@@ -35,12 +36,14 @@
               size="small"
               icon="Edit"
               @click="updataTrademark(row)"
+              v-has="'btn.Trademark.update'"
             />
             <el-popconfirm
               :title="`您确定删除${row.tmName}?`"
               width="240px"
               icon="Delete"
               @confirm="deleteTrademark(row.id)"
+              v-has="'btn.Trademark.remove'"
             >
               <template #reference>
                 <el-button type="primary" size="small" icon="Delete" />
