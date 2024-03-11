@@ -59,7 +59,7 @@ let $route = useRoute()
 //定义变量控制按钮加载效果
 let loading = ref<any>(false)
 //收集表单数据
-let loginFrom = reactive({ username: 'admin', password: '111111' })
+let loginFrom = reactive({ username: '', password: '' })
 
 const login = async () => {
   // 表单项全部通过再发请求
